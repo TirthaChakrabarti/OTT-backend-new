@@ -1,0 +1,33 @@
+Setting up full package.json : npm init -y
+
+setting up dependencies: 
+    npm i express mysql2 dotenv sequelize
+    cors bcryptjs jsonwebtoken express-validator
+
+Nodemon: npm i --save-dev nodemon
+
+Provided environment variables in .env
+
+Created DB connection in db.js 
+Later installed Sequelize:
+    Sequelize: npx sequelize-cli init
+    [Creates config/config.json, models/index.js, migration folder, seeder folder]
+Converted config.json to config.js (this generalizes db.js for multiple environments)
+In db.js, we initialized and export a Sequelize instance using this config/config.js (which reads from .env)
+
+We can use it anywhere we need DB access: const sequelize = require('../config/db');
+We can use it to test connection: 
+    sequelize.authenticate()
+  .then(() => console.log('✅ Database connected.'))
+  .catch(err => console.error('❌ Unable to connect to DB:', err));
+
+[Created other folders manually]
+
+Created various .js files for models  
+Created various .js files for categorized routes (auth, user etc.)
+
+Created controllers (categorized)
+[My old code directly interacted with DB. Those are now converted and includes ORM usage]
+
+Created Middlewares (categorized)
+[Used my own JWT-based authentication middleware code from old project]
