@@ -18,13 +18,13 @@ exports.register = async (req, res) => {
         return res.status(400).json({ message: "User already registered" });
       } else {
         await existing.update({ name, email, status: 1 });
-        const token = jwt.sign({ id: existing.id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: existing.id }, process.env.JWT_SECRET_KEY);
         return res.status(201).json({ message: "User reactivated", token });
       }
     }
 
     const newUser = await db.User.create({ name, email, phone });
-    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET_KEY);
     return res
       .status(201)
       .json({ message: "User registered successfully", token });
@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: "Incorrect OTP" });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY);
     return res.json({ token });
   } catch (err) {
     console.error(err);

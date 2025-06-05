@@ -8,6 +8,8 @@ const authMiddleware = (req, res, next) => {
   }
 
   const token = authHeader.split(" ")[1]; // Extract the token from the "Bearer" scheme
+  console.log(token);
+  console.log(process.env.JWT_SECRET_KEY);
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY); // Verify the token

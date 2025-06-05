@@ -3,11 +3,13 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: { type: DataTypes.STRING, unique: true },
     phone: { type: DataTypes.STRING, unique: true },
-    password: DataTypes.STRING,
+    otp: DataTypes.STRING,
     role: { type: DataTypes.ENUM("user", "admin"), defaultValue: "user" },
     birthdate: DataTypes.DATEONLY,
-    gender: DataTypes.STRING,
-    status: { type: DataTypes.INTEGER, defaultValue: 1 },
+    gender: {
+      type: DataTypes.ENUM("male", "female", "other"),
+    },
+    status: { type: DataTypes.BOOLEAN, defaultValue: true },
   });
 
   User.associate = (models) => {
